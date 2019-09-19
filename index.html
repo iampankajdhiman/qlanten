@@ -113,7 +113,7 @@
             <div class="sort"><i class="material-icons">sort</i></div>
           </div>
           <ul id="external">
-            <li class="service-post" data-id="WO201900001" data-duration="3600">
+            <li class="service-post" id="WO201900001" data-id="WO201900001" data-duration="3600" data-color="#ff0000">
               <div style="cursor:move">
                 <div class="service-post-head">
                 <h3>WO201900001</h3>
@@ -125,7 +125,7 @@
                     <i class="material-icons">business_center</i> Leakage in bathroom
                   </li>
                   <li>
-                    <i class="material-icons">access_time</i> <strong>08:30 PM - 09:30 PM</strong>
+                    <i class="material-icons">access_time</i> <strong class="time">08:30 PM - 09:30 PM</strong>
                   </li>
                 </ul>
                 <div class="user-pro">
@@ -140,7 +140,7 @@
               </div>
               </div>
             </li>
-            <li class="service-post" data-id="WO201900002" data-duration="7200"><div style="cursor:move">
+            <li class="service-post" id="WO201900002" data-id="WO201900002" data-duration="7200"><div style="cursor:move">
               <div class="service-post-head">
                 <h3>WO201900001</h3>
                 <i class="material-icons">star</i>
@@ -165,7 +165,7 @@
                 </div>
               </div>
             </div></li>
-            <li class="service-post" data-id="WO201900003" data-duration="10800"><div style="cursor:move">
+            <li class="service-post" id="WO201900003" data-id="WO201900003" data-duration="10800" data-color="#ff0000"><div style="cursor:move">
               <div class="service-post-head">
                 <h3>WO201900001</h3>
                 <i class="material-icons">star</i>
@@ -190,7 +190,7 @@
                 </div>
               </div>
             </div></li>
-            <li class="service-post" data-id="WO201900004" data-duration="1800"><div style="cursor:move">
+            <li class="service-post" data-id="WO201900004" data-duration="1800" data-color="#ff0000"><div style="cursor:move">
               <div class="service-post-head">
                 <h3>WO201900001</h3>
                 <i class="material-icons">star</i>
@@ -215,7 +215,7 @@
                 </div>
               </div>
             </div></li>
-            <li class="service-post" data-id="WO201900005" data-duration="7200"><div style="cursor:move">
+            <li class="service-post" data-id="WO201900005" data-duration="7200" data-color="#ff0000"><div style="cursor:move">
               <div class="service-post-head">
                 <h3>WO201900001</h3>
                 <i class="material-icons">star</i>
@@ -240,7 +240,7 @@
                 </div>
               </div>
             </div></li>
-            <li class="service-post" data-id="WO201900006" data-duration="14400"><div style="cursor:move">
+            <li class="service-post" data-id="WO201900006" data-duration="14400" data-color="#ff0000"><div style="cursor:move">
               <div class="service-post-head">
                 <h3>WO201900001</h3>
                 <i class="material-icons">star</i>
@@ -265,7 +265,7 @@
                 </div>
               </div>
             </div></li>
-            <li class="service-post" data-id="WO201900007" data-duration="9000"><div style="cursor:move">
+            <li class="service-post" data-id="WO201900007" data-duration="9000" data-color="#ff0000"><div style="cursor:move">
               <div class="service-post-head">
                 <h3>WO201900001</h3>
                 <i class="material-icons">star</i>
@@ -276,7 +276,7 @@
                     <i class="material-icons">business_center</i> Window broken in bathroom
                   </li>
                   <li>
-                    <i class="material-icons">access_time</i> <strong>08:30 PM - 09:30 PM</strong>
+                    <i class="material-icons">access_time</i> <strong class="time">08:30 PM - 09:30 PM</strong>
                   </li>
                 </ul>
                 <div class="user-pro">
@@ -290,7 +290,7 @@
                 </div>
               </div>
             </div></li>
-            <li class="service-post" data-id="WO201900008" data-duration="3600"><div style="cursor:move">
+            <li class="service-post" data-id="WO201900008" data-duration="3600" data-color="#ff0000"><div style="cursor:move">
               <div class="service-post-head">
                 <h3>WO201900001</h3>
                 <i class="material-icons">star</i>
@@ -315,7 +315,7 @@
                 </div>
               </div>
             </div></li>
-            <li class="service-post" data-id="WO201900009" data-duration="7200"><div style="cursor:move">
+            <li class="service-post" data-id="WO201900009" data-duration="7200" data-color="#ff0000"><div style="cursor:move">
               <div class="service-post-head">
                 <h3>WO201900001</h3>
                 <i class="material-icons">star</i>
@@ -340,7 +340,7 @@
                 </div>
               </div>
             </div></li>
-            <li class="service-post" data-id="WO2019000010" data-duration="2700"><div style="cursor:move">
+            <li class="service-post" data-id="WO2019000010" data-duration="2700" data-color="#ff0000"><div style="cursor:move">
               <div class="service-post-head">
                 <h3>WO201900001</h3>
                 <i class="material-icons">star</i>
@@ -399,50 +399,83 @@
       {
         "groupBy": "Hour"
       },
-      {
-        "groupBy": "Cell",
-        "format": "mm"
-      }
+      // {
+      //   "groupBy": "Cell",
+      //   "format": "mm"
+      // }
     ];
-    dp.scale = "CellDuration";
-    dp.cellDuration = 15;
-    dp.days = 1,
+    dp.scale = "Hour";
+    dp.days = 1;
+    dp.cellWidth = 150;
+    dp.cellHeight = 100;
             dp.startDate = new DayPilot.Date.today();
+            dp.timeRangeSelectingStartEndEnabled = true;
     dp.showNonBusiness = false;
     dp.timeRangeSelectedHandling = "Enabled";
 
     // dp.showNonBusiness = false;
+    dp.onBeforeCellRender = function(args) {
+      if (args.cell.resource === "L1" || args.cell.resource === "L2" || args.cell.resource === "L3") {
+        args.cell.disabled = true;
+        args.cell.backColor = "#ccc";
+      }
+    };
+
+    // dp.onBeforeEventRender = function(args) {
+    //   var start = new DayPilot.Date(args.data.start);
+    //   var end = new DayPilot.Date(args.data.end);
+    //   console.log(start);
+    //   args.data.areas = [
+    //     // {start: start, end: start.addDays(1), top: 0, bottom: 0, backColor: "#6AA84F", html: args.data.text, fontColor: "white", padding: 5},
+    //     // {start: start.addDays(1), end: end.addDays(-1), top: 0, bottom: 0, backColor: "#38761D", html: args.data.text, fontColor: "white", padding: 5},
+    //     {start: end.addDays(-1), end: end, top: 0, bottom: 0, backColor: "#4e0f1a", html: args.data.text, fontColor: "white", padding: 5},
+    //   ];
+    // };
 
     dp.treeEnabled = true;
     dp.resources = [
-      { name: "ABC Constructors", id: "A" },
-      { name: "Mildred Barlow Associates", id: "B" },
-      { name: "Wishmonger Industries", id: "C" },
-      { name: "Parkes Unlimited", id: "D" },
-      { name: "Barlow and Co", id: "E" },
-      { name: "Barlow of Rijssen", id: "F" },
+      { name: "Location A", id: "L1",expanded: true, children: [
+          { name: "ABC Constructors", id: "A", },
+          { name: "Mildred Barlow Associates", id: "B" },
+        ]},
+      { name: "Location B", id: "L2", expanded: true, children: [
+          { name: "Wishmonger Industries", id: "C" },
+          { name: "Parkes Unlimited", id: "D" },
+          { name: "Barlow and Co", id: "E" },
+        ]},
+      { name: "Location C", id: "L3", expanded: true, children: [
+          { name: "Barlow of Rijssen", id: "F" },
+        ]},
+
+
     ];
 
     // event creating
-    dp.onTimeRangeSelected = function (args) {
-      var name = prompt("New event name:", "Event");
-      dp.clearSelection();
-      if (!name) return;
-      var e = new DayPilot.Event({
-        start: args.start,
-        end: args.end,
-        id: DayPilot.guid(),
-        resource: args.resource,
-        text: name
-      });
-      dp.events.add(e);
-      dp.message("Created");
-    };
+    // dp.onTimeRangeSelected = function (args) {
+    //   var name = prompt("New event name:", "Event");
+    //   dp.clearSelection();
+    //   if (!name) return;
+    //   var e = new DayPilot.Event({
+    //     start: args.start,
+    //     end: args.end,
+    //     id: DayPilot.guid(),
+    //     resource: args.resource,
+    //     text: name
+    //   });
+    //   dp.events.add(e);
+    //   dp.message("Created");
+    // };
 
     dp.onAfterEventRender = function(args) {
       var div = args.div;
       var e = args.e;
-
+      var start = formatTime(e.data.start);
+      var end = formatTime(e.data.end);
+      // var parent = document.getElementById('WO201900001')[0];
+      // // var utag = ;
+      // var timeText = parent.getElementsByTagName("strong")[0].innerHtml = 'wkhddkj';
+      // console.log(timeText);
+      // timeText.html();
       div.ondragover = function(ev) {
         ev.preventDefault();
         ev.dataTransfer.dropEffect = "move";
@@ -451,11 +484,25 @@
       div.ondrop = function(ev) {
         var data = ev.dataTransfer.getData("text/plain");
         e.data.text += " " + data;
+
         dp.events.update(e);
       };
     };
 
     dp.init();
+
+    // $(document).ready(function() {
+    //   $("#cellwidth")[0].oninput = function(ev) {
+    //     console.log(parseInt(this.value));
+    //     var cellwidth = parseInt(this.value);
+    //     $("#label").html(cellwidth);
+    //     var start = dp.getViewPort().start;
+    //
+    //     dp.cellWidth = cellwidth;
+    //     dp.update();
+    //     dp.scrollTo(start);
+    //   };
+    // });
 
     function makeDraggable() {
       var parent = document.getElementById("external");
@@ -465,8 +512,9 @@
         var item = {
           element: e,
           id: e.getAttribute("data-id"),
-          text: e.innerText,
-          duration: e.getAttribute("data-duration")
+          text: e.getAttribute("data-id"),
+          duration: e.getAttribute("data-duration"),
+          backColor: e.getAttribute("data-color")
         };
         DayPilot.Scheduler.makeDraggable(item);
       }
@@ -486,6 +534,18 @@
         day = '0' + day;
 
       return [year, month, day].join('-');
+    }
+    function formatTime(date) {
+      var d = new Date(date),
+              hour = '' + (d.getHours()),
+              minutes = '' + d.getMinutes();
+
+      if (hour.length < 2)
+        hour = '0' + hour;
+      if (minutes.length < 2)
+        minutes = '0' + minutes;
+
+      return [hour, minutes].join(':');
     }
 
   </script>
