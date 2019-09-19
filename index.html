@@ -11,6 +11,7 @@
   <!-- CSS -->
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/custom.css">
+  <link rel="stylesheet" href="css/scheduler_traditional.css">
 
 
   <link rel="shortcut icon" href="favicon.png" sizes="32x32" type="image/x-icon">
@@ -190,7 +191,25 @@
 
         </div>
       </div>
-      <div class="col s9">Add your plugin here....</div>
+      <div class="col s9">
+        <div style="float:left; width: 200px;">
+          <ul id="external">
+            <li data-id="WO201900001" data-duration="3600"><span style="cursor:move">WO201900001 </span></li>
+            <li data-id="WO201900002" data-duration="7200"><span style="cursor:move">WO201900002</span></li>
+            <li data-id="WO201900003" data-duration="10800"><span style="cursor:move">WO201900003</span></li>
+            <li data-id="WO201900004" data-duration="1800"><span style="cursor:move">WO201900004</span></li>
+            <li data-id="WO201900005" data-duration="7200"><span style="cursor:move">WO201900005</span></li>
+            <li data-id="WO201900006" data-duration="14400"><span style="cursor:move">WO201900006</span></li>
+            <li data-id="WO201900007" data-duration="9000"><span style="cursor:move">WO201900007</span></li>
+            <li data-id="WO201900008" data-duration="3600"><span style="cursor:move">WO201900008</span></li>
+            <li data-id="WO201900009" data-duration="7200"><span style="cursor:move">WO201900009</span></li>
+            <li data-id="WO2019000010" data-duration="2700"><span style="cursor:move">WO2019000010</span></li>
+          </ul>
+        </div>
+        <div style="margin-left: 210px">
+          <div id="dp"></div>
+        </div>
+      </div>
     </div>
 
   </main>
@@ -198,9 +217,116 @@
 
   <!--JavaScript at end of body for optimized loading-->
   <script src="js/jquery.min.js"></script>
+  <script src="js/daypilot-all.min.js"></script>
   <script src="js/materialize.min.js"></script>
   <script src="js/calendar.js"></script>
   <script src="js/custom.js"></script>
+
+<!--   Plugin JS -->
+  <script type="text/javascript">
+    var dp = new DayPilot.Scheduler("dp");
+
+    // view
+    let d = formatDate();
+    dp.timeHeaders = [
+      {
+        "groupBy": "Day",
+        "format": "dddd, d MMMM yyyy"
+      },
+      {
+        "groupBy": "Hour"
+      },
+      {
+        "groupBy": "Cell",
+        "format": "mm"
+      }
+    ];
+    dp.scale = "CellDuration";
+    dp.cellDuration = 15;
+    dp.days = 1,
+            dp.startDate = new DayPilot.Date.today();
+    dp.showNonBusiness = false;
+    dp.timeRangeSelectedHandling = "Enabled";
+
+    // dp.showNonBusiness = false;
+
+    dp.treeEnabled = true;
+    dp.resources = [
+      { name: "ABC Constructors", id: "A" },
+      { name: "Mildred Barlow Associates", id: "B" },
+      { name: "Wishmonger Industries", id: "C" },
+      { name: "Parkes Unlimited", id: "D" },
+      { name: "Barlow and Co", id: "E" },
+      { name: "Barlow of Rijssen", id: "F" },
+    ];
+
+    // event creating
+    dp.onTimeRangeSelected = function (args) {
+      var name = prompt("New event name:", "Event");
+      dp.clearSelection();
+      if (!name) return;
+      var e = new DayPilot.Event({
+        start: args.start,
+        end: args.end,
+        id: DayPilot.guid(),
+        resource: args.resource,
+        text: name
+      });
+      dp.events.add(e);
+      dp.message("Created");
+    };
+
+    dp.onAfterEventRender = function(args) {
+      var div = args.div;
+      var e = args.e;
+
+      div.ondragover = function(ev) {
+        ev.preventDefault();
+        ev.dataTransfer.dropEffect = "move";
+      };
+
+      div.ondrop = function(ev) {
+        var data = ev.dataTransfer.getData("text/plain");
+        e.data.text += " " + data;
+        dp.events.update(e);
+      };
+    };
+
+    dp.init();
+
+    function makeDraggable() {
+      var parent = document.getElementById("external");
+      var items = parent.getElementsByTagName("li");
+      for (var i = 0; i < items.length; i++) {
+        var e = items[i];
+        var item = {
+          element: e,
+          id: e.getAttribute("data-id"),
+          text: e.innerText,
+          duration: e.getAttribute("data-duration")
+        };
+        DayPilot.Scheduler.makeDraggable(item);
+      }
+    }
+
+    makeDraggable();
+
+    function formatDate() {
+      var d = new Date(),
+              month = '' + (d.getMonth() + 1),
+              day = '' + d.getDate(),
+              year = d.getFullYear();
+
+      if (month.length < 2)
+        month = '0' + month;
+      if (day.length < 2)
+        day = '0' + day;
+
+      return [year, month, day].join('-');
+    }
+
+  </script>
+
 </body>
 
 </html>
