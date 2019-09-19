@@ -1,0 +1,314 @@
+main {
+    background: $color-light;
+    padding: 40px 32px;
+    min-height: calc(100% - 103px);
+
+    .datepicker-cover {
+        box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.07);
+
+        .modal.datepicker-modal {
+            display: block !important;
+            position: static;
+        }
+    }
+
+    .spacer {
+        display: block;
+        height: 6px;
+        background: #bdbdbd;
+        margin: 25px 0;
+    }
+
+    .service-cover {
+        .service-head {
+            margin-bottom: 18px;
+            .dropdown-trigger.btn {
+                display: inline-block;
+                vertical-align: middle;
+                background: linear-gradient(to bottom, #f7f7f7, #e0e0e0);
+                border-radius: 3px;
+                box-shadow: none;
+                border: solid 1px #b3b3b3;
+                position: relative;
+                color: #000000;
+                font-family: $sans-serif-m;
+                font-size: 14px;
+                text-align: left;
+                text-transform: capitalize;
+                padding: 0 15px;
+                height: auto;
+                min-height: 1px;
+                line-height: 2.3;
+                width: calc(100% - 40px);
+                margin-right: 10px;
+
+                i {
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    right: 5px;
+                    line-height: 1;
+                }
+            }
+
+            .sort {
+                display: inline-block;
+                vertical-align: middle;
+
+                i {
+                    line-height: 1;
+                }
+            }
+        }
+
+        article {
+            background: #fff;
+            border: solid 1px #dedede;
+            border-radius: 4px;
+            margin-bottom: 18px;
+
+            .service-post-head {
+                background: #f8f8f8;
+                padding: 10px 30px 10px 10px;
+                position: relative;
+                border-top-left-radius: 4px;
+                border-top-right-radius: 4px;
+
+                h3 {
+                    margin: 0;
+                    padding: 0;
+                    line-height: 1.2;
+                    font-family: $sans-serif-m;
+                    font-size: 16px;
+                    color: #000;
+                    text-transform: uppercase;
+                }
+
+                i {
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    right: 0;
+                    color: #cccccc;
+                    right: 5px;
+                    font-size: 20px;
+                }
+            }
+
+            .service-post-body{
+                padding:15px;
+                ul{
+                    margin: 0;
+                    padding: 0;
+                    li{
+                        display: inline-block;
+                        width: 100%;
+                        position: relative;
+                        padding-left: 26px;
+                        color: #555555;
+                        font-size: 14px;
+                        font-family: $sans-serif;
+                        margin-bottom: 8px;
+                        strong{
+                            font-family: $sans-serif-m;
+                            font-weight: normal;
+                        }
+                        i{
+                            position: absolute;
+                            top: 1px;
+                            left: 0;
+                            line-height: 1;
+                            color: $color-secondary;
+                            font-size: 19px;
+                        }
+                    }
+                }
+
+                .user-pro{
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    width: 100%;
+                    margin-top: 5px;
+
+                    figure{
+                        @include bg-cover;
+                        border-radius: 100%;
+                        width: 26px;
+                        height: 26px;
+                        margin: 0;
+                    }
+
+                    a{
+                        font-size: 14px;
+                        color: #29328c;
+                        font-family: $sans-serif;
+                        text-decoration: underline;
+
+                        &:hover, &:focus{
+                            color: $color-secondary;
+                        }
+                    }
+                }
+
+                .status{
+                    border-top: solid 1px #e3e3e3;
+                    padding-top: 10px;
+                    margin-top: 10px;
+                    background: transparent !important;
+                    p{
+                        margin: 0;
+                        font-size: 14px;
+                        color: #939393;
+                        span{
+                            display: inline-block;
+                            padding: 2px 10px;
+                            border-radius: 4px;
+                            color: #000000;
+                            vertical-align: 0px;
+                            line-height: 1.5;
+
+                        }
+                    }
+
+                    &.green{
+                        span{
+                            background:#91f089;
+                        }
+                    }
+                    &.blue{
+                        span{
+                            background:#89e5f0;
+                        }
+                    }
+                    &.orange{
+                        span{
+                            background:#f0c689;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+.responsive-calendar {
+    background: #edf9ff;
+}
+
+
+.responsive-calendar-modal {
+    background-color: #1d86c8;
+    color: white;
+    padding: 1em;
+}
+
+.responsive-calendar .controls {
+    text-align: center;
+    position: relative;
+    padding: 15px;
+}
+
+.responsive-calendar .controls a {
+    cursor: pointer;
+    color: #17a2b8;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 15px;
+}
+
+.responsive-calendar .controls a:last-child {
+    left: auto;
+    right: 15px;
+}
+
+.responsive-calendar .controls h4 {
+    display: inline;
+}
+
+.responsive-calendar .controls h4 span {
+    display: block;
+    font-size: 28px;
+    color: #17a2b8;
+    font-family: $sans-serif-m;
+    line-height: 1.2;
+}
+
+.responsive-calendar .controls h4 span:last-child {
+    font-size: 14px;
+    color: #555555;
+    font-family: $sans-serif;
+}
+
+.responsive-calendar .day-headers {
+    background: #fff;
+}
+
+.responsive-calendar .day-headers,
+.responsive-calendar .days {
+    font-size: 0;
+}
+
+.responsive-calendar .day {
+    display: inline-block;
+    position: relative;
+    font-size: 14px;
+    width: 14.285714285714286%;
+    text-align: center;
+}
+
+.responsive-calendar .day a {
+    color: #000000;
+    display: block;
+    cursor: pointer;
+    padding: 20% 0 20% 0;
+}
+
+.responsive-calendar .day a:hover {
+    background-color: rgba(23, 162, 184, 0.19);
+    text-decoration: none;
+}
+
+//   .responsive-calendar .day.header {
+//     border-bottom: 1px gray solid;
+//   }
+
+.responsive-calendar .day.active a {
+    background-color: #1d86c8;
+    color: #ffffff;
+}
+
+.responsive-calendar .day.active a:hover {
+    background-color: #36a0e2;
+}
+
+.responsive-calendar .day.active .not-current {
+    background-color: #8fcaef;
+    color: #ffffff;
+}
+
+.responsive-calendar .day.active .not-current:hover {
+    background-color: #bcdff5;
+}
+
+.responsive-calendar .day.not-current a {
+    color: #b1b1b1;
+}
+
+.responsive-calendar .day .badge {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    z-index: 1;
+}
+
+.responsive-calendar .day.today {
+    background: #17a2b8;
+    color: #fff;
+}
+
+.responsive-calendar .day.today a {
+    color: #fff;
+}
