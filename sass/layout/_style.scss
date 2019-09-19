@@ -61,7 +61,7 @@ main {
             }
         }
 
-        article {
+        article, .service-post {
             background: #fff;
             border: solid 1px #dedede;
             border-radius: 4px;
@@ -186,6 +186,16 @@ main {
                             background:#f0c689;
                         }
                     }
+                }
+            }
+        }
+    }
+
+    .resources-section{
+        .scheduler_default_corner{
+            .scheduler_default_corner_inner{
+                & + div{
+                    display: none;
                 }
             }
         }
