@@ -3,6 +3,10 @@ header {
     padding: 20px 40px;
     box-shadow: 3px 0px 7px rgba(#000, 0.25);
 
+    @include breakpoint(desktop){
+        padding: 10px 25px;
+    }
+
     nav {
         background: #fff;
         box-shadow: none;
@@ -11,6 +15,11 @@ header {
 
         .brand-logo {
             position: static;
+            @include breakpoint(desktop){
+                img{
+                    max-width: 180px;
+                }
+            }
         }
 
         .nav-wrapper {
@@ -23,10 +32,18 @@ header {
             margin-right: auto;
             margin-left: em(70);
 
+            @include breakpoint(desktop){
+                margin-left: em(40);
+            }
+
             li {
                 margin-right: 35px;
                 position: relative;
                 background: transparent;
+
+                @include breakpoint(desktop){
+                    margin-right: 20px;
+                }
 
                 &:before {
                     content: "";
@@ -37,6 +54,9 @@ header {
                     background: $color-secondary;
                     height: 2px;
                     opacity: 0;
+                    @include breakpoint(desktop){
+                        bottom: -27px;
+                    }
                 }
 
                 a {
@@ -84,6 +104,10 @@ header {
                     color: #000;
                     border-radius: 40px;
                     margin: 0;
+
+                    @include breakpoint(desktop){
+                        width: 150px;
+                    }
 
                     @include placeholder {
                         color: rgba(#000, 0.5);

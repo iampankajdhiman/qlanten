@@ -1,7 +1,21 @@
 main {
     background: $color-light;
     padding: 40px 32px;
-    min-height: calc(100% - 103px);
+    height: calc(100% - 103px);
+
+    @include breakpoint(desktop){
+        padding: 20px 16px;
+        height: calc(100% - 68px);
+    }
+
+    &>.row{
+        height: 100%;
+        div.col{
+            height: 100%;
+            overflow: hidden;
+            overflow-y: auto;
+        }
+    }
 
     .datepicker-cover {
         box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.07);
