@@ -423,19 +423,15 @@
     dp.scale = "Hour";
     dp.days = 1;
     dp.cellWidth = 150;
-    dp.cellHeight = 100;
-            dp.startDate = new DayPilot.Date.today();
-            dp.timeRangeSelectingStartEndEnabled = true;
+    dp.cellHeight = 20;
+    dp.startDate = new DayPilot.Date.today();
+    dp.timeRangeSelectingStartEndEnabled = true;
     dp.showNonBusiness = false;
     dp.timeRangeSelectedHandling = "Enabled";
-
-    // dp.showNonBusiness = false;
+    
     dp.onBeforeCellRender = function(args) {
       if (args.cell.resource === "L1" || args.cell.resource === "L2" || args.cell.resource === "L3") {
         args.cell.disabled = true;
-        // args.cell.backColor = "#ccc";args.cell.cssClass ='row1';
-
-        // console.log();
       }
     };
     dp.treeEnabled = true;
@@ -523,19 +519,6 @@
     };
 
     dp.init();
-
-    // $(document).ready(function() {
-    //   $("#cellwidth")[0].oninput = function(ev) {
-    //     console.log(parseInt(this.value));
-    //     var cellwidth = parseInt(this.value);
-    //     $("#label").html(cellwidth);
-    //     var start = dp.getViewPort().start;
-    //
-    //     dp.cellWidth = cellwidth;
-    //     dp.update();
-    //     dp.scrollTo(start);
-    //   };
-    // });
 
     function makeDraggable() {
       var parent = document.getElementById("external");
