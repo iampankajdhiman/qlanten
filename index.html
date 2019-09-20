@@ -136,6 +136,7 @@
                 </ul>
                 <div class="user-pro">
                   <figure style="background-image: url('images/user-img.png');"></figure>
+                  <div class="resource_name"></div>
                   <a href="#">Details</a>
                 </div>
                 <div class="status green">
@@ -162,6 +163,7 @@
                 </ul>
                 <div class="user-pro">
                   <figure style="background-image: url('images/user-img.png');"></figure>
+                  <div class="resource_name"></div>
                   <a href="#">Details</a>
                 </div>
                 <div class="status green">
@@ -187,6 +189,7 @@
                 </ul>
                 <div class="user-pro">
                   <figure style="background-image: url('images/user-img.png');"></figure>
+                  <div class="resource_name"></div>
                   <a href="#">Details</a>
                 </div>
                 <div class="status green">
@@ -212,6 +215,7 @@
                 </ul>
                 <div class="user-pro">
                   <figure style="background-image: url('images/user-img.png');"></figure>
+                  <div class="resource_name"></div>
                   <a href="#">Details</a>
                 </div>
                 <div class="status green">
@@ -237,6 +241,7 @@
                 </ul>
                 <div class="user-pro">
                   <figure style="background-image: url('images/user-img.png');"></figure>
+                  <div class="resource_name"></div>
                   <a href="#">Details</a>
                 </div>
                 <div class="status green">
@@ -262,6 +267,7 @@
                 </ul>
                 <div class="user-pro">
                   <figure style="background-image: url('images/user-img.png');"></figure>
+                  <div class="resource_name"></div>
                   <a href="#">Details</a>
                 </div>
                 <div class="status green">
@@ -287,6 +293,7 @@
                 </ul>
                 <div class="user-pro">
                   <figure style="background-image: url('images/user-img.png');"></figure>
+                  <div class="resource_name"></div>
                   <a href="#">Details</a>
                 </div>
                 <div class="status green">
@@ -312,6 +319,7 @@
                 </ul>
                 <div class="user-pro">
                   <figure style="background-image: url('images/user-img.png');"></figure>
+                  <div class="resource_name"></div>
                   <a href="#">Details</a>
                 </div>
                 <div class="status green">
@@ -337,6 +345,7 @@
                 </ul>
                 <div class="user-pro">
                   <figure style="background-image: url('images/user-img.png');"></figure>
+                  <div class="resource_name"></div>
                   <a href="#">Details</a>
                 </div>
                 <div class="status green">
@@ -362,6 +371,7 @@
                 </ul>
                 <div class="user-pro">
                   <figure style="background-image: url('images/user-img.png');"></figure>
+                  <div class="resource_name"></div>
                   <a href="#">Details</a>
                 </div>
                 <div class="status green">
@@ -428,31 +438,19 @@
         // console.log();
       }
     };
-    // dp.onBeforeResHeaderRender = function(args) {
-    //   if (args.resource.loaded === false) {
-    //     args.resource.html += " (loaded dynamically)";
-    //     args.resource.backColor = "gray";
-    //
-    //   }
-    //   if (args.row.value === "A") {
-    //     args.row.addClass = "row1";
-    //   }
-    //
-    // };
-
     dp.treeEnabled = true;
     dp.resources = [
       { name: "Location A", id: "L1",expanded: true, children: [
-          { name: "ABC Constructors", id: "A"},
-          { name: "Mildred Barlow Associates", id: "B" },
+          { name: "ABC Constructors", id: "ABC Constructors"},
+          { name: "Mildred Barlow Associates", id: "Mildred Barlow Associates" },
         ]},
       { name: "Location B", id: "L2", expanded: true, children: [
-          { name: "Wishmonger Industries", id: "C"},
-          { name: "Parkes Unlimited", id: "D"},
-          { name: "Barlow and Co", id: "E"},
+          { name: "Wishmonger Industries", id: "Wishmonger Industries"},
+          { name: "Parkes Unlimited", id: "Parkes Unlimited"},
+          { name: "Barlow and Co", id: "Barlow and Co"},
         ]},
       { name: "Location C", id: "L3", expanded: true,  children: [
-          { name: "Barlow of Rijssen", id: "F" }
+          { name: "Barlow of Rijssen", id: "Barlow of Rijssen" }
         ]},
 
 
@@ -499,8 +497,18 @@
       var e = args.e;
       var start = formatTime(e.data.start);
       var end = formatTime(e.data.end);
+
+
       var parent = document.getElementById(e.data.id);
-      var timeText = parent.getElementsByTagName("strong")[0].innerText = start+' - '+end;
+      // Time Change
+      parent.getElementsByTagName("strong")[0].innerText = start+' - '+end;
+      // Status Change
+      parent.getElementsByClassName("status")[0].getElementsByTagName("p")[0].getElementsByTagName("span")[0].innerText = "Scheduled";
+      parent.getElementsByClassName("status")[0].classList.remove("green");
+      parent.getElementsByClassName("status")[0].classList.add("orange");
+      // Add resource name
+      console.log(parent.getElementsByClassName('resource_name')[0].innerText);
+      parent.getElementsByClassName('resource_name')[0].innerText = e.data.resource;
 
       // timeText.html();
       div.ondragover = function(ev) {
