@@ -192,13 +192,37 @@ main {
     }
 
     .resources-section{
-        .scheduler_default_corner{
-            .scheduler_default_corner_inner{
-                & + div{
+        .scheduler_default_main{
+            border:none;
+            box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.07);
+
+            .scheduler_default_corner{
+                background: #fff;
+                .scheduler_default_corner_inner{
+                    & + div{
+                        display: none;
+                    }
+                }
+            }
+
+            .scheduler_default_rowheader{
+                background: #fff !important;
+                .scheduler_default_tree_image_collapse{
+                    display: none;
+                }
+                .scheduler_default_rowheader_inner_text{
+                    font-family: $sans-serif-m;
+                    font-size: 16px;
+                    color: #000;
+                    margin: 0 !important;
+                }
+                .scheduler_default_resourcedivider, .scheduler_default_tree_image_no_children{
                     display: none;
                 }
             }
         }
+
+
     }
 }
 
