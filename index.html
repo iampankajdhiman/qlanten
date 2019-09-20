@@ -423,7 +423,9 @@
     dp.onBeforeCellRender = function(args) {
       if (args.cell.resource === "L1" || args.cell.resource === "L2" || args.cell.resource === "L3") {
         args.cell.disabled = true;
-        args.cell.backColor = "#ccc";
+        // args.cell.backColor = "#ccc";args.cell.cssClass ='row1';
+
+        // console.log();
       }
     };
     // dp.onBeforeResHeaderRender = function(args) {
@@ -440,36 +442,22 @@
 
     dp.treeEnabled = true;
     dp.resources = [
-      { name: "Location A", id: "L1",expanded: true, backColor: "#ccc", children: [
+      { name: "Location A", id: "L1",expanded: true, children: [
           { name: "ABC Constructors", id: "A"},
           { name: "Mildred Barlow Associates", id: "B" },
         ]},
-      { name: "Location B", id: "L2", expanded: true,backColor: "#ccc", children: [
+      { name: "Location B", id: "L2", expanded: true, children: [
           { name: "Wishmonger Industries", id: "C"},
           { name: "Parkes Unlimited", id: "D"},
           { name: "Barlow and Co", id: "E"},
         ]},
-      { name: "Location C", id: "L3", expanded: true, backColor: "#ccc", children: [
+      { name: "Location C", id: "L3", expanded: true,  children: [
           { name: "Barlow of Rijssen", id: "F" }
         ]},
 
 
     ];
 
-    // dp.onTimeRangeSelected = function (args) {
-    //   var name = prompt("New event name:", "Event");
-    //   dp.clearSelection();
-    //   if (!name) return;
-    //   var e = new DayPilot.Event({
-    //     start: args.start,
-    //     end: args.end,
-    //     id: DayPilot.guid(),
-    //     resource: args.resource,
-    //     text: name
-    //   });
-    //   dp.events.add(e);
-    //   dp.message("Created");
-    // };
     dp.onBeforeRowHeaderRender = function(args) {
       if(args.row.index === 1) {
         args.row.areas = [
@@ -502,6 +490,8 @@
           { right: 12, top: 2, bottom: 2, width: 50, html: "<div><img src='images/logo.png'></div>", }
         ];
       }
+
+      // console.log( args.row);
     };
 
     dp.onAfterEventRender = function(args) {
@@ -509,8 +499,8 @@
       var e = args.e;
       var start = formatTime(e.data.start);
       var end = formatTime(e.data.end);
-      // var parent = document.getElementById(e.data.id);
-      // var timeText = parent.getElementsByTagName("strong")[0].innerText = 'wkhddkj';
+      var parent = document.getElementById(e.data.id);
+      var timeText = parent.getElementsByTagName("strong")[0].innerText = start+' - '+end;
 
       // timeText.html();
       div.ondragover = function(ev) {
@@ -549,7 +539,8 @@
           id: e.getAttribute("data-id"),
           text: e.getAttribute("data-id"),
           duration: e.getAttribute("data-duration"),
-          backColor: e.getAttribute("data-color")
+          backColor: e.getAttribute("data-color"),
+          keepElement: true
         };
         DayPilot.Scheduler.makeDraggable(item);
       }
