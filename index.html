@@ -15,6 +15,12 @@
 
 
   <link rel="shortcut icon" href="favicon.png" sizes="32x32" type="image/x-icon">
+  <style>
+    .row1 {
+      color: white;
+      background: rgb(0, 0, 0);
+    }
+  </style>
 </head>
 
 <body>
@@ -190,7 +196,7 @@
                 </div>
               </div>
             </div></li>
-            <li class="service-post" data-id="WO201900004" data-duration="1800" data-color="#ffefd7"><div style="cursor:move">
+            <li class="service-post" id="WO201900004" data-id="WO201900004" data-duration="1800" data-color="#ffefd7"><div style="cursor:move">
               <div class="service-post-head">
                 <h3>WO201900004</h3>
                 <i class="material-icons">star</i>
@@ -215,7 +221,7 @@
                 </div>
               </div>
             </div></li>
-            <li class="service-post" data-id="WO201900005" data-duration="7200" data-color="#d2fff6"><div style="cursor:move">
+            <li class="service-post" id="WO201900005" data-id="WO201900005" data-duration="7200" data-color="#d2fff6"><div style="cursor:move">
               <div class="service-post-head">
                 <h3>WO201900005</h3>
                 <i class="material-icons">star</i>
@@ -240,7 +246,7 @@
                 </div>
               </div>
             </div></li>
-            <li class="service-post" data-id="WO201900006" data-duration="14400" data-color="#e1f0ff"><div style="cursor:move">
+            <li class="service-post" id="WO201900006" data-id="WO201900006" data-duration="14400" data-color="#e1f0ff"><div style="cursor:move">
               <div class="service-post-head">
                 <h3>WO201900006</h3>
                 <i class="material-icons">star</i>
@@ -265,7 +271,7 @@
                 </div>
               </div>
             </div></li>
-            <li class="service-post" data-id="WO201900007" data-duration="9000" data-color="#f0e4ff"><div style="cursor:move">
+            <li class="service-post" id="WO201900007" data-id="WO201900007" data-duration="9000" data-color="#f0e4ff"><div style="cursor:move">
               <div class="service-post-head">
                 <h3>WO201900007</h3>
                 <i class="material-icons">star</i>
@@ -290,7 +296,7 @@
                 </div>
               </div>
             </div></li>
-            <li class="service-post" data-id="WO201900008" data-duration="3600" data-color="#ffefd7"><div style="cursor:move">
+            <li class="service-post" id="WO201900008" data-id="WO201900008" data-duration="3600" data-color="#ffefd7"><div style="cursor:move">
               <div class="service-post-head">
                 <h3>WO201900008</h3>
                 <i class="material-icons">star</i>
@@ -315,7 +321,7 @@
                 </div>
               </div>
             </div></li>
-            <li class="service-post" data-id="WO201900009" data-duration="7200" data-color="#d2fff6"><div style="cursor:move">
+            <li class="service-post" id="WO201900009" data-id="WO201900009" data-duration="7200" data-color="#d2fff6"><div style="cursor:move">
               <div class="service-post-head">
                 <h3>WO201900009</h3>
                 <i class="material-icons">star</i>
@@ -340,7 +346,7 @@
                 </div>
               </div>
             </div></li>
-            <li class="service-post" data-id="WO2019000010" data-duration="2700" data-color="#e1f0ff"><div style="cursor:move">
+            <li class="service-post" id="WO2019000010" data-id="WO2019000010" data-duration="2700" data-color="#e1f0ff"><div style="cursor:move">
               <div class="service-post-head">
                 <h3>WO2019000010</h3>
                 <i class="material-icons">star</i>
@@ -420,37 +426,36 @@
         args.cell.backColor = "#ccc";
       }
     };
-
-    // dp.onBeforeEventRender = function(args) {
-    //   var start = new DayPilot.Date(args.data.start);
-    //   var end = new DayPilot.Date(args.data.end);
-    //   console.log(start);
-    //   args.data.areas = [
-    //     // {start: start, end: start.addDays(1), top: 0, bottom: 0, backColor: "#6AA84F", html: args.data.text, fontColor: "white", padding: 5},
-    //     // {start: start.addDays(1), end: end.addDays(-1), top: 0, bottom: 0, backColor: "#38761D", html: args.data.text, fontColor: "white", padding: 5},
-    //     {start: end.addDays(-1), end: end, top: 0, bottom: 0, backColor: "#4e0f1a", html: args.data.text, fontColor: "white", padding: 5},
-    //   ];
+    // dp.onBeforeResHeaderRender = function(args) {
+    //   if (args.resource.loaded === false) {
+    //     args.resource.html += " (loaded dynamically)";
+    //     args.resource.backColor = "gray";
+    //
+    //   }
+    //   if (args.row.value === "A") {
+    //     args.row.addClass = "row1";
+    //   }
+    //
     // };
 
     dp.treeEnabled = true;
     dp.resources = [
-      { name: "Location A", id: "L1",expanded: true, children: [
-          { name: "ABC Constructors", id: "A", },
+      { name: "Location A", id: "L1",expanded: true, backColor: "#ccc", children: [
+          { name: "ABC Constructors", id: "A"},
           { name: "Mildred Barlow Associates", id: "B" },
         ]},
-      { name: "Location B", id: "L2", expanded: true, children: [
-          { name: "Wishmonger Industries", id: "C" },
-          { name: "Parkes Unlimited", id: "D" },
-          { name: "Barlow and Co", id: "E" },
+      { name: "Location B", id: "L2", expanded: true,backColor: "#ccc", children: [
+          { name: "Wishmonger Industries", id: "C"},
+          { name: "Parkes Unlimited", id: "D"},
+          { name: "Barlow and Co", id: "E"},
         ]},
-      { name: "Location C", id: "L3", expanded: true, children: [
-          { name: "Barlow of Rijssen", id: "F" },
+      { name: "Location C", id: "L3", expanded: true, backColor: "#ccc", children: [
+          { name: "Barlow of Rijssen", id: "F" }
         ]},
 
 
     ];
 
-    // event creating
     // dp.onTimeRangeSelected = function (args) {
     //   var name = prompt("New event name:", "Event");
     //   dp.clearSelection();
@@ -465,15 +470,47 @@
     //   dp.events.add(e);
     //   dp.message("Created");
     // };
+    dp.onBeforeRowHeaderRender = function(args) {
+      if(args.row.index === 1) {
+        args.row.areas = [
+          { right: 20, top: 2, bottom: 2, width: 50, html: "<div><div><img src='images/logo.png'></div></div>", }
+        ];
+      }
+      if(args.row.index === 2) {
+        args.row.areas = [
+          { right: 12, top: 2, bottom: 2, width: 50, html: "<div><div><img src='images/logo.png'></div></div>", }
+        ];
+      }
+
+      if(args.row.index === 4) {
+        args.row.areas = [
+          { right: 12, top: 2, bottom: 2, width: 50, html: "<div><div><img src='images/logo.png'></div></div>", }
+        ];
+      }
+      if(args.row.index === 5) {
+        args.row.areas = [
+          { right: 12, top: 2, bottom: 2, width: 50, html: "<div><div><img src='images/logo.png'></div></div>", }
+        ];
+      }
+      if(args.row.index === 6) {
+        args.row.areas = [
+          { right: 12, top: 2, bottom: 2, width: 50, html: "<div><div><img src='images/logo.png'></div></div>", }
+        ];
+      }
+      if(args.row.index === 8) {
+        args.row.areas = [
+          { right: 12, top: 2, bottom: 2, width: 50, html: "<div><div><img src='images/logo.png'></div></div>", }
+        ];
+      }
+    };
 
     dp.onAfterEventRender = function(args) {
       var div = args.div;
       var e = args.e;
       var start = formatTime(e.data.start);
       var end = formatTime(e.data.end);
-      var parent = document.getElementById(e.data.id);
-      // var utag = ;
-      var timeText = parent.getElementsByTagName("strong")[0].innerText = 'wkhddkj';
+      // var parent = document.getElementById(e.data.id);
+      // var timeText = parent.getElementsByTagName("strong")[0].innerText = 'wkhddkj';
 
       // timeText.html();
       div.ondragover = function(ev) {
