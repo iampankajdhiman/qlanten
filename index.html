@@ -413,7 +413,7 @@
     dp.scale = "Hour";
     dp.days = 1;
     dp.cellWidth = 150;
-    dp.cellHeight = 100;
+    dp.rowMinHeight = 60;
             dp.startDate = new DayPilot.Date.today();
             dp.timeRangeSelectingStartEndEnabled = true;
     dp.showNonBusiness = false;
@@ -461,33 +461,33 @@
     dp.onBeforeRowHeaderRender = function(args) {
       if(args.row.index === 1) {
         args.row.areas = [
-          {  html: "<div class='scheduler_img' ><img src='images/logo.png'></div>", }
+          {  html: "<div class='scheduler_img' ><img src='images/user-img-1.jpg'></div>", }
         ];
       }
       if(args.row.index === 2) {
         args.row.areas = [
-          { right: 12, top: 2, bottom: 2, width: 50, html: "<div><img src='images/logo.png'></div>", }
+          { html: "<div class='scheduler_img' ><img src='images/user-img-2.jpg'></div>",  }
         ];
       }
 
       if(args.row.index === 4) {
         args.row.areas = [
-          { right: 12, top: 2, bottom: 2, width: 50, html: "<div><img src='images/logo.png'></div>", }
+          { html: "<div class='scheduler_img' ><img src='images/user-img-3.jpg'></div>",  }
         ];
       }
       if(args.row.index === 5) {
         args.row.areas = [
-          { right: 12, top: 2, bottom: 2, width: 50, html: "<div><img src='images/logo.png'></div>", }
+          { html: "<div class='scheduler_img' ><img src='images/user-img-4.jpg'></div>",  }
         ];
       }
       if(args.row.index === 6) {
         args.row.areas = [
-          { right: 12, top: 2, bottom: 2, width: 50, html: "<div><img src='images/logo.png'></div>", }
+          { html: "<div class='scheduler_img' ><img src='images/user-img-5.jpg'></div>",  }
         ];
       }
       if(args.row.index === 8) {
         args.row.areas = [
-          { right: 12, top: 2, bottom: 2, width: 50, html: "<div><img src='images/logo.png'></div>", }
+          { html: "<div class='scheduler_img' ><img src='images/user-img-6.jpg'></div>",  }
         ];
       }
 

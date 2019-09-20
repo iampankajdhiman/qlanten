@@ -22,6 +22,7 @@ main {
     .service-cover {
         .service-head {
             margin-bottom: 18px;
+
             .dropdown-trigger.btn {
                 display: inline-block;
                 vertical-align: middle;
@@ -61,7 +62,8 @@ main {
             }
         }
 
-        article, .service-post {
+        article,
+        .service-post {
             background: #fff;
             border: solid 1px #dedede;
             border-radius: 4px;
@@ -95,12 +97,14 @@ main {
                 }
             }
 
-            .service-post-body{
-                padding:15px;
-                ul{
+            .service-post-body {
+                padding: 15px;
+
+                ul {
                     margin: 0;
                     padding: 0;
-                    li{
+
+                    li {
                         display: inline-block;
                         width: 100%;
                         position: relative;
@@ -109,11 +113,13 @@ main {
                         font-size: 14px;
                         font-family: $sans-serif;
                         margin-bottom: 8px;
-                        strong{
+
+                        strong {
                             font-family: $sans-serif-m;
                             font-weight: normal;
                         }
-                        i{
+
+                        i {
                             position: absolute;
                             top: 1px;
                             left: 0;
@@ -124,14 +130,14 @@ main {
                     }
                 }
 
-                .user-pro{
+                .user-pro {
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                     width: 100%;
                     margin-top: 5px;
 
-                    figure{
+                    figure {
                         @include bg-cover;
                         border-radius: 100%;
                         width: 26px;
@@ -139,28 +145,31 @@ main {
                         margin: 0;
                     }
 
-                    a{
+                    a {
                         font-size: 14px;
                         color: #29328c;
                         font-family: $sans-serif;
                         text-decoration: underline;
 
-                        &:hover, &:focus{
+                        &:hover,
+                        &:focus {
                             color: $color-secondary;
                         }
                     }
                 }
 
-                .status{
+                .status {
                     border-top: solid 1px #e3e3e3;
                     padding-top: 10px;
                     margin-top: 10px;
                     background: transparent !important;
-                    p{
+
+                    p {
                         margin: 0;
                         font-size: 14px;
                         color: #939393;
-                        span{
+
+                        span {
                             display: inline-block;
                             padding: 2px 10px;
                             border-radius: 4px;
@@ -171,19 +180,21 @@ main {
                         }
                     }
 
-                    &.green{
-                        span{
-                            background:#91f089;
+                    &.green {
+                        span {
+                            background: #91f089;
                         }
                     }
-                    &.blue{
-                        span{
-                            background:#89e5f0;
+
+                    &.blue {
+                        span {
+                            background: #89e5f0;
                         }
                     }
-                    &.orange{
-                        span{
-                            background:#f0c689;
+
+                    &.orange {
+                        span {
+                            background: #f0c689;
                         }
                     }
                 }
@@ -191,35 +202,73 @@ main {
         }
     }
 
-    .resources-section{
-        .scheduler_default_main{
-            border:none;
+    .resources-section {
+        .scheduler_default_main {
+            border: none;
             box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.07);
 
-            .scheduler_default_corner{
+            .scheduler_default_corner {
                 background: #fff;
-                .scheduler_default_corner_inner{
-                    & + div{
+
+                .scheduler_default_corner_inner {
+                    &+div {
                         display: none;
                     }
                 }
             }
 
-            .scheduler_default_rowheader{
+            .scheduler_default_rowheader {
                 background: #fff !important;
-                .scheduler_default_tree_image_collapse{
+
+                .scheduler_default_tree_image_collapse {
                     display: none;
                 }
-                .scheduler_default_rowheader_inner_text{
+
+                .scheduler_default_rowheader_inner_text {
                     font-family: $sans-serif-m;
                     font-size: 16px;
                     color: #000;
                     margin: 0 !important;
                 }
-                .scheduler_default_resourcedivider, .scheduler_default_tree_image_no_children{
+
+                .scheduler_default_resourcedivider,
+                .scheduler_default_tree_image_no_children {
                     display: none;
                 }
+
+                .scheduler_default_rowheader_inner {
+                    .scheduler_default_rowheader_inner_text {
+                        padding-left: 28px;
+                    }
+                }
+
+                .scheduler_img {
+                    position: absolute;
+                    top: 13px;
+                    left: 12px;
+                    width: 34px;
+                    height: 34px;
+                    border-radius: 100%;
+                }
+
+                &.Parent {
+                    border-top: solid 1px #eeeeee;
+                    margin-top: -1px;
+
+                    .scheduler_default_rowheader_inner {
+                        .scheduler_default_rowheader_inner_text {
+                            padding-left: 4px;
+                        }
+                    }
+                }
             }
+        }
+
+        .scheduler_default_timeheader_float_inner {
+            display: inline-block;
+            padding: 3px 4px;
+            background: #fff;
+            box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.08);
         }
 
 
