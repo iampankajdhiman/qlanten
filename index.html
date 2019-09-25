@@ -410,351 +410,363 @@
   <script src="js/custom.js"></script>
 <!--   Plugin JS -->
   <script type="text/javascript">
-    // DAY
-    var day = new DayPilot.Scheduler("day");
-    let d = formatDate();
-    day.timeHeaders = [
-      {
-        "groupBy": "Day",
-        "format": "dddd, d MMMM yyyy"
-      },
-      {
-        "groupBy": "Hour"
-      },
-    ];
-    day.scale = "Hour";
-    day.days = 1;
 
-    day.cellWidth = 150;
-    day.rowMinHeight = 60;
-    day.startDate = new DayPilot.Date.today();
-    day.timeRangeSelectingStartEndEnabled = true;
+    let eventArray = [];
+    let count = 0;
+    var dp = new DayPilot.Scheduler("dp");
+    daySchedular();
 
-    day.showNonBusiness = false;
-    day.timeRangeSelectedHandling = "Enabled";
+    function daySchedular() {
 
-    day.onBeforeCellRender = function (args) {
-      if (args.cell.resource === "L1" || args.cell.resource === "L2" || args.cell.resource === "L3") {
-        args.cell.disabled = true;
-      }
-    };
-    day.treeEnabled = true;
-    day.resources = [
-      {
-        name: "Location A", id: "L1", expanded: true, children: [
-          {name: "ABC Constructors", id: "ABC Constructors"},
-          {name: "Mildred Barlow Associates", id: "Mildred Barlow Associates"},
-        ]
-      },
-      {
-        name: "Location B", id: "L2", expanded: true, children: [
-          {name: "Wishmonger Industries", id: "Wishmonger Industries"},
-          {name: "Parkes Unlimited", id: "Parkes Unlimited"},
-          {name: "Barlow and Co", id: "Barlow and Co"},
-        ]
-      },
-      {
-        name: "Location C", id: "L3", expanded: true, children: [
-          {name: "Barlow of Rijssen", id: "Barlow of Rijssen"}
-        ]
-      },
+      // dp.startDate = new DayPilot.Date.today();
+      dp.timeHeaders = [
+        {
+          "groupBy": "Day",
+          "format": "dddd, d MMMM yyyy"
+        },
+        {
+          "groupBy": "Hour"
+        },
+      ];
+      dp.scale = "Hour";
+      dp.startDate = new DayPilot.Date();
+      dp.cellWidth = 150;
+      dp.rowMinHeight = 60;
+      dp.timeRangeSelectingStartEndEnabled = true;
+      dp.showNonBusiness = false;
+      dp.days = 365;
+      dp.onBeforeCellRender = function (args) {
+        if (args.cell.resource === "L1" || args.cell.resource === "L2" || args.cell.resource === "L3") {
+          args.cell.disabled = true;
+        }
+      };
+      dp.treeEnabled = true;
+      dp.resources = [
+        {
+          name: "Location A", id: "L1", expanded: true, children: [
+            {name: "ABC Constructors", id: "ABC Constructors"},
+            {name: "Mildred Barlow Associates", id: "Mildred Barlow Associates"},
+          ]
+        },
+        {
+          name: "Location B", id: "L2", expanded: true, children: [
+            {name: "Wishmonger Industries", id: "Wishmonger Industries"},
+            {name: "Parkes Unlimited", id: "Parkes Unlimited"},
+            {name: "Barlow and Co", id: "Barlow and Co"},
+          ]
+        },
+        {
+          name: "Location C", id: "L3", expanded: true, children: [
+            {name: "Barlow of Rijssen", id: "Barlow of Rijssen"}
+          ]
+        },
+      ];
+      dp.onBeforeRowHeaderRender = function (args) {
+        if (args.row.index === 1) {
+          args.row.areas = [
+            {html: "<div class='scheduler_img' ><img src='images/user-img-1.jpg'></div>",}
+          ];
+        }
+        if (args.row.index === 2) {
+          args.row.areas = [
+            {html: "<div class='scheduler_img' ><img src='images/user-img-2.jpg'></div>",}
+          ];
+        }
 
+        if (args.row.index === 4) {
+          args.row.areas = [
+            {html: "<div class='scheduler_img' ><img src='images/user-img-3.jpg'></div>",}
+          ];
+        }
+        if (args.row.index === 5) {
+          args.row.areas = [
+            {html: "<div class='scheduler_img' ><img src='images/user-img-4.jpg'></div>",}
+          ];
+        }
+        if (args.row.index === 6) {
+          args.row.areas = [
+            {html: "<div class='scheduler_img' ><img src='images/user-img-5.jpg'></div>",}
+          ];
+        }
+        if (args.row.index === 8) {
+          args.row.areas = [
+            {html: "<div class='scheduler_img' ><img src='images/user-img-6.jpg'></div>",}
+          ];
+        }
 
-    ];
+        // console.log( args.row);
+      };
+      dp.onAfterEventRender = function (args) {
+        var div = args.div;
+        var e = args.e;
+        var start = formatTime(e.data.start);
+        var end = formatTime(e.data.end);
 
-    day.onBeforeRowHeaderRender = function (args) {
-      if (args.row.index === 1) {
-        args.row.areas = [
-          {html: "<div class='scheduler_img' ><img src='images/user-img-1.jpg'></div>",}
-        ];
-      }
-      if (args.row.index === 2) {
-        args.row.areas = [
-          {html: "<div class='scheduler_img' ><img src='images/user-img-2.jpg'></div>",}
-        ];
-      }
+        var parent = document.getElementById(e.data.id);
+        // Time Change
+        parent.getElementsByTagName("strong")[0].innerText = start + ' - ' + end;
+        // Status Change
+        parent.getElementsByClassName("status")[0].getElementsByTagName("p")[0].getElementsByTagName("span")[0].innerText = "Scheduled";
+        parent.getElementsByClassName("status")[0].classList.remove("green");
+        parent.getElementsByClassName("status")[0].classList.add("orange");
+        // Add resource name
+        parent.getElementsByClassName('resource_name')[0].innerText = e.data.resource;
 
-      if (args.row.index === 4) {
-        args.row.areas = [
-          {html: "<div class='scheduler_img' ><img src='images/user-img-3.jpg'></div>",}
-        ];
-      }
-      if (args.row.index === 5) {
-        args.row.areas = [
-          {html: "<div class='scheduler_img' ><img src='images/user-img-4.jpg'></div>",}
-        ];
-      }
-      if (args.row.index === 6) {
-        args.row.areas = [
-          {html: "<div class='scheduler_img' ><img src='images/user-img-5.jpg'></div>",}
-        ];
-      }
-      if (args.row.index === 8) {
-        args.row.areas = [
-          {html: "<div class='scheduler_img' ><img src='images/user-img-6.jpg'></div>",}
-        ];
-      }
+        const pushdata = {
+          start: e.data.start,
+          end: e.data.end,
+          id: e.data.id,
+          resource:  e.data.resource,
+          text: e.data.text,
+          bubbleHtml: "Testing bubble"
+        };
+        if(eventArray.length > 0) {
+          for (let i = 0; i < eventArray.length ; i++) {
+            if(eventArray[i].id === pushdata.id){
+              console.log('hjkj-1');
+              break;
+            } else {
+              console.log('hjkj');
+              eventArray.push(pushdata);
+            }
+          }
+        } else {
+          eventArray.push(pushdata);
+        }
 
-      // console.log( args.row);
-    };
+        console.log(eventArray);
 
-    day.onAfterEventRender = function (args) {
-      var div = args.div;
-      var e = args.e;
-      var start = formatTime(e.data.start);
-      var end = formatTime(e.data.end);
+        // timeText.html();
+        div.ondragover = function (ev) {
+          ev.preventDefault();
+          ev.dataTransfer.dropEffect = "move";
 
-      var parent = document.getElementById(e.data.id);
-      // Time Change
-      parent.getElementsByTagName("strong")[0].innerText = start + ' - ' + end;
-      // Status Change
-      parent.getElementsByClassName("status")[0].getElementsByTagName("p")[0].getElementsByTagName("span")[0].innerText = "Scheduled";
-      parent.getElementsByClassName("status")[0].classList.remove("green");
-      parent.getElementsByClassName("status")[0].classList.add("orange");
-      // Add resource name
-      console.log(parent.getElementsByClassName('resource_name')[0].innerText);
-      parent.getElementsByClassName('resource_name')[0].innerText = e.data.resource;
+          // ev.allowed = true;
+        };
 
-      // timeText.html();
-      div.ondragover = function (ev) {
-        ev.preventDefault();
-        ev.dataTransfer.dropEffect = "move";
+        div.ondrop = function (ev) {
+          var data = ev.dataTransfer.getData("text/plain");
+          e.data.text += " " + data;
+
+        };
       };
 
-      div.ondrop = function (ev) {
-        var data = ev.dataTransfer.getData("text/plain");
-        e.data.text += " " + data;
+      if(count === 0) {
+        dp.init();
+        count++;
+      } else {
+
+        dp.clearSelection();
+        dp.update();
+      }
+
+    }
+
+    function weekSchedular() {
+      // var dp = new DayPilot.Scheduler("week");
+      dp.timeHeaders = [
+        {groupBy: "Week"},
+        {groupBy: "Cell", format: "dddd"},
+        {groupBy: "Cell", format: "d MMMM yyyy"}
+      ];
+      dp.scale = "Day";
+      dp.days = 365;
+      dp.scrollTo(new DayPilot.Date());
+      dp.startDate = new DayPilot.Date("2019-01-01").firstDayOfMonth();
+      dp.cellWidth = 150;
+      dp.rowMinHeight = 60;
+      dp.timeRangeSelectingStartEndEnabled = true;
+      dp.showNonBusiness = false;
+      dp.clearSelection();
+      dp.events.list = eventArray;
+      console.log(dp.events.list);
+      dp.showCurrentTime = true;
+      dp.onBeforeCellRender = function (args) {
+        if (args.cell.resource === "L1" || args.cell.resource === "L2" || args.cell.resource === "L3") {
+          args.cell.disabled = true;
+        }
+
+        if (args.cell.start.getDatePart().getTime() === new DayPilot.Date().getDatePart().getTime()) {
+          args.cell.backColor = "silver";
+        }
       };
-    };
+      dp.treeEnabled = true;
+      dp.resources = [
+        {
+          name: "Location A", id: "L1", expanded: true, children: [
+            {name: "ABC Constructors", id: "ABC Constructors"},
+            {name: "Mildred Barlow Associates", id: "Mildred Barlow Associates"},
+          ]
+        },
+        {
+          name: "Location B", id: "L2", expanded: true, children: [
+            {name: "Wishmonger Industries", id: "Wishmonger Industries"},
+            {name: "Parkes Unlimited", id: "Parkes Unlimited"},
+            {name: "Barlow and Co", id: "Barlow and Co"},
+          ]
+        },
+        {
+          name: "Location C", id: "L3", expanded: true, children: [
+            {name: "Barlow of Rijssen", id: "Barlow of Rijssen"}
+          ]
+        },
+      ];
+      dp.onBeforeRowHeaderRender = function (args) {
+        if (args.row.index === 1) {
+          args.row.areas = [
+            {html: "<div class='scheduler_img' ><img src='images/user-img-1.jpg'></div>",}
+          ];
+        }
+        if (args.row.index === 2) {
+          args.row.areas = [
+            {html: "<div class='scheduler_img' ><img src='images/user-img-2.jpg'></div>",}
+          ];
+        }
 
-    day.init();
+        if (args.row.index === 4) {
+          args.row.areas = [
+            {html: "<div class='scheduler_img' ><img src='images/user-img-3.jpg'></div>",}
+          ];
+        }
+        if (args.row.index === 5) {
+          args.row.areas = [
+            {html: "<div class='scheduler_img' ><img src='images/user-img-4.jpg'></div>",}
+          ];
+        }
+        if (args.row.index === 6) {
+          args.row.areas = [
+            {html: "<div class='scheduler_img' ><img src='images/user-img-5.jpg'></div>",}
+          ];
+        }
+        if (args.row.index === 8) {
+          args.row.areas = [
+            {html: "<div class='scheduler_img' ><img src='images/user-img-6.jpg'></div>",}
+          ];
+        }
 
-    // Month
-    var month = new DayPilot.Scheduler("month");
-    month.startDate = new DayPilot.Date("2019-01-01").firstDayOfMonth();
-    month.cellGroupBy = "Month";
-    // month.cellDuration = 1440; // one day
-
-    month.moveBy = 'Full';
-
-    month.timeHeaders = [
-      {groupBy: "Month"},
-      {groupBy: "Cell", format: "d MMMM yyyy"}
-    ];
-    month.scale = "Day";
-    month.days = 365;
-    month.cellWidth = 150;
-    month.rowMinHeight = 60;
-    month.startDate = new DayPilot.Date("2019-01-01").firstDayOfMonth();
-    month.timeRangeSelectingStartEndEnabled = true;
-
-    month.showNonBusiness = false;
-    month.timeRangeSelectedHandling = "Enabled";
-
-    month.onBeforeCellRender = function (args) {
-      if (args.cell.resource === "L1" || args.cell.resource === "L2" || args.cell.resource === "L3") {
-        args.cell.disabled = true;
-      }
-    };
-    month.treeEnabled = true;
-    month.resources = [
-      {
-        name: "Location A", id: "L1", expanded: true, children: [
-          {name: "ABC Constructors", id: "ABC Constructors"},
-          {name: "Mildred Barlow Associates", id: "Mildred Barlow Associates"},
-        ]
-      },
-      {
-        name: "Location B", id: "L2", expanded: true, children: [
-          {name: "Wishmonger Industries", id: "Wishmonger Industries"},
-          {name: "Parkes Unlimited", id: "Parkes Unlimited"},
-          {name: "Barlow and Co", id: "Barlow and Co"},
-        ]
-      },
-      {
-        name: "Location C", id: "L3", expanded: true, children: [
-          {name: "Barlow of Rijssen", id: "Barlow of Rijssen"}
-        ]
-      },
-
-
-    ];
-
-    month.onBeforeRowHeaderRender = function (args) {
-      if (args.row.index === 1) {
-        args.row.areas = [
-          {html: "<div class='scheduler_img' ><img src='images/user-img-1.jpg'></div>",}
-        ];
-      }
-      if (args.row.index === 2) {
-        args.row.areas = [
-          {html: "<div class='scheduler_img' ><img src='images/user-img-2.jpg'></div>",}
-        ];
-      }
-
-      if (args.row.index === 4) {
-        args.row.areas = [
-          {html: "<div class='scheduler_img' ><img src='images/user-img-3.jpg'></div>",}
-        ];
-      }
-      if (args.row.index === 5) {
-        args.row.areas = [
-          {html: "<div class='scheduler_img' ><img src='images/user-img-4.jpg'></div>",}
-        ];
-      }
-      if (args.row.index === 6) {
-        args.row.areas = [
-          {html: "<div class='scheduler_img' ><img src='images/user-img-5.jpg'></div>",}
-        ];
-      }
-      if (args.row.index === 8) {
-        args.row.areas = [
-          {html: "<div class='scheduler_img' ><img src='images/user-img-6.jpg'></div>",}
-        ];
-      }
-    };
-
-    month.onAfterEventRender = function (args) {
-      var div = args.div;
-      var e = args.e;
-      var start = formatTime(e.data.start);
-      var end = formatTime(e.data.end);
-
-      var parent = document.getElementById(e.data.id);
-      // Time Change
-      parent.getElementsByTagName("strong")[0].innerText = start + ' - ' + end;
-      // Status Change
-      parent.getElementsByClassName("status")[0].getElementsByTagName("p")[0].getElementsByTagName("span")[0].innerText = "Scheduled";
-      parent.getElementsByClassName("status")[0].classList.remove("green");
-      parent.getElementsByClassName("status")[0].classList.add("orange");
-      // Add resource name
-      console.log(parent.getElementsByClassName('resource_name')[0].innerText);
-      parent.getElementsByClassName('resource_name')[0].innerText = e.data.resource;
-
-      // timeText.html();
-      div.ondragover = function (ev) {
-        ev.preventDefault();
-        ev.dataTransfer.dropEffect = "move";
+        // console.log( args.row);
       };
+      dp.onAfterEventRender = function (args) {
+        var div = args.div;
+        var e = args.e;
 
-      div.ondrop = function (ev) {
-        var data = ev.dataTransfer.getData("text/plain");
-        e.data.text += " " + data;
+        // timeText.html();
+        div.ondragover = function (ev) {
+          ev.preventDefault();
+          ev.dataTransfer.dropEffect = "move";
+          // ev.allowed = true;
+        };
+
+        div.ondrop = function (ev) {
+          var data = ev.dataTransfer.getData("text/plain");
+          e.data.text += " " + data;
+        };
       };
-    };
+      dp.update();
+    }
 
-    month.init();
+    function monthSchedular(){
+      // var dp = new DayPilot.Scheduler("month");
+      dp.startDate = new DayPilot.Date("2019-01-01").firstDayOfMonth();
+      dp.cellGroupBy = "Month";
 
-    // week
-    var week = new DayPilot.Scheduler("week");
-    week.timeHeaders = [
-      {groupBy: "Week"},
-      {groupBy: "Cell", format: "dddd"},
-      {groupBy: "Cell", format: "d MMMM yyyy"}
-    ];
-    week.scale = "Day";
-    week.days = 365;
-    week.cellWidth = 150;
-    week.rowMinHeight = 60;
-    week.startDate = new DayPilot.Date("2019-01-01").firstDayOfMonth();
-    week.timeRangeSelectingStartEndEnabled = true;
+      dp.timeHeaders = [
+        {groupBy: "Month"},
+        {groupBy: "Cell", format: "d MMMM yyyy"}
+      ];
+      dp.scale = "Day";
+      dp.scrollTo(new DayPilot.Date());
+      dp.days = 365;
+      dp.cellWidth = 150;
+      dp.rowMinHeight = 60;
+      dp.timeRangeSelectingStartEndEnabled = true;
+      dp.showNonBusiness = false;
+      dp.clearSelection();
+      dp.events.list = eventArray;
+      dp.showCurrentTime = true;
+      dp.onBeforeCellRender = function (args) {
+        if (args.cell.resource === "L1" || args.cell.resource === "L2" || args.cell.resource === "L3") {
+          args.cell.disabled = true;
+        }
 
-    week.showNonBusiness = false;
-    week.timeRangeSelectedHandling = "Enabled";
-
-    week.onBeforeCellRender = function (args) {
-      if (args.cell.resource === "L1" || args.cell.resource === "L2" || args.cell.resource === "L3") {
-        args.cell.disabled = true;
-      }
-    };
-    week.treeEnabled = true;
-    week.resources = [
-      {
-        name: "Location A", id: "L1", expanded: true, children: [
-          {name: "ABC Constructors", id: "ABC Constructors"},
-          {name: "Mildred Barlow Associates", id: "Mildred Barlow Associates"},
-        ]
-      },
-      {
-        name: "Location B", id: "L2", expanded: true, children: [
-          {name: "Wishmonger Industries", id: "Wishmonger Industries"},
-          {name: "Parkes Unlimited", id: "Parkes Unlimited"},
-          {name: "Barlow and Co", id: "Barlow and Co"},
-        ]
-      },
-      {
-        name: "Location C", id: "L3", expanded: true, children: [
-          {name: "Barlow of Rijssen", id: "Barlow of Rijssen"}
-        ]
-      },
-
-
-    ];
-
-    week.onBeforeRowHeaderRender = function (args) {
-      if (args.row.index === 1) {
-        args.row.areas = [
-          {html: "<div class='scheduler_img' ><img src='images/user-img-1.jpg'></div>",}
-        ];
-      }
-      if (args.row.index === 2) {
-        args.row.areas = [
-          {html: "<div class='scheduler_img' ><img src='images/user-img-2.jpg'></div>",}
-        ];
-      }
-
-      if (args.row.index === 4) {
-        args.row.areas = [
-          {html: "<div class='scheduler_img' ><img src='images/user-img-3.jpg'></div>",}
-        ];
-      }
-      if (args.row.index === 5) {
-        args.row.areas = [
-          {html: "<div class='scheduler_img' ><img src='images/user-img-4.jpg'></div>",}
-        ];
-      }
-      if (args.row.index === 6) {
-        args.row.areas = [
-          {html: "<div class='scheduler_img' ><img src='images/user-img-5.jpg'></div>",}
-        ];
-      }
-      if (args.row.index === 8) {
-        args.row.areas = [
-          {html: "<div class='scheduler_img' ><img src='images/user-img-6.jpg'></div>",}
-        ];
-      }
-
-      // console.log( args.row);
-    };
-    week.onAfterEventRender = function (args) {
-      var div = args.div;
-      var e = args.e;
-      var start = formatTime(e.data.start);
-      var end = formatTime(e.data.end);
-
-      var parent = document.getElementById(e.data.id);
-      // Time Change
-      parent.getElementsByTagName("strong")[0].innerText = start + ' - ' + end;
-      // Status Change
-      parent.getElementsByClassName("status")[0].getElementsByTagName("p")[0].getElementsByTagName("span")[0].innerText = "Scheduled";
-      parent.getElementsByClassName("status")[0].classList.remove("green");
-      parent.getElementsByClassName("status")[0].classList.add("orange");
-      // Add resource name
-      parent.getElementsByClassName('resource_name')[0].innerText = e.data.resource;
-
-      // timeText.html();
-      div.ondragover = function (ev) {
-        ev.preventDefault();
-        ev.dataTransfer.dropEffect = "move";
+        if (args.cell.start.getDatePart().getTime() === new DayPilot.Date().getDatePart().getTime()) {
+          args.cell.backColor = "silver";
+        }
       };
+      dp.treeEnabled = true;
+      dp.resources = [
+        {
+          name: "Location A", id: "L1", expanded: true, children: [
+            {name: "ABC Constructors", id: "ABC Constructors"},
+            {name: "Mildred Barlow Associates", id: "Mildred Barlow Associates"},
+          ]
+        },
+        {
+          name: "Location B", id: "L2", expanded: true, children: [
+            {name: "Wishmonger Industries", id: "Wishmonger Industries"},
+            {name: "Parkes Unlimited", id: "Parkes Unlimited"},
+            {name: "Barlow and Co", id: "Barlow and Co"},
+          ]
+        },
+        {
+          name: "Location C", id: "L3", expanded: true, children: [
+            {name: "Barlow of Rijssen", id: "Barlow of Rijssen"}
+          ]
+        },
+      ];
+      dp.onBeforeRowHeaderRender = function (args) {
+        if (args.row.index === 1) {
+          args.row.areas = [
+            {html: "<div class='scheduler_img' ><img src='images/user-img-1.jpg'></div>",}
+          ];
+        }
+        if (args.row.index === 2) {
+          args.row.areas = [
+            {html: "<div class='scheduler_img' ><img src='images/user-img-2.jpg'></div>",}
+          ];
+        }
 
-      div.ondrop = function (ev) {
-        var data = ev.dataTransfer.getData("text/plain");
-        e.data.text += " " + data;
+        if (args.row.index === 4) {
+          args.row.areas = [
+            {html: "<div class='scheduler_img' ><img src='images/user-img-3.jpg'></div>",}
+          ];
+        }
+        if (args.row.index === 5) {
+          args.row.areas = [
+            {html: "<div class='scheduler_img' ><img src='images/user-img-4.jpg'></div>",}
+          ];
+        }
+        if (args.row.index === 6) {
+          args.row.areas = [
+            {html: "<div class='scheduler_img' ><img src='images/user-img-5.jpg'></div>",}
+          ];
+        }
+        if (args.row.index === 8) {
+          args.row.areas = [
+            {html: "<div class='scheduler_img' ><img src='images/user-img-6.jpg'></div>",}
+          ];
+        }
+
+        // console.log( args.row);
       };
-    };
-    week.init();
-    week.scrollTo("2019-09-23");
+      dp.onAfterEventRender = function (args) {
+        var div = args.div;
+        var e = args.e;
+
+        // timeText.html();
+        div.ondragover = function (ev) {
+          ev.preventDefault();
+          ev.dataTransfer.dropEffect = "move";
+        };
+
+        div.ondrop = function (ev) {
+          var data = ev.dataTransfer.getData("text/plain");
+          e.data.text += " " + data;
+        };
+      };
+      dp.update();
+    }
+
     function makeDraggable() {
       var parent = document.getElementById("external");
       var items = parent.getElementsByTagName("li");
@@ -764,12 +776,17 @@
           element: e,
           id: e.getAttribute("data-id"),
           text: e.getAttribute("data-id"),
-          duration: e.getAttribute("data-duration"),
+          duration: e.getAttribute("data-duration"),  // hours
+          barColor: e.getAttribute("data-color"),
+          barBackColor: e.getAttribute("data-color"),
           backColor: e.getAttribute("data-color"),
+          externalCssClass: "external-shadow",
+          bubbleHtml: "Testing bubble",
           keepElement: true
+
         };
+
         DayPilot.Scheduler.makeDraggable(item);
-        // DayPilot.Month.makeDraggable(item);
       }
     }
 
@@ -783,10 +800,10 @@
 
       if (month.length < 2)
         month = '0' + month;
-      if (day.length < 2)
-        day = '0' + day;
+      if (d.length < 2)
+        d = '0' + d;
 
-      return [year, month, day].join('-');
+      return [year, month, d].join('-');
     }
 
     function formatTime(date) {
@@ -801,28 +818,6 @@
 
       return [hour, minutes].join(':');
     }
-  </script>
-
-  <script type="text/javascript">
-   $(document).ready(function(e) {
-     $('#week').hide();
-     $('#month').hide();
-    $('.day').click( function() {
-      $('#week').hide();
-      $('#month').hide();
-      $('#day').show();
-    });
-    $('.week').click( function() {
-      $('#day').hide();
-      $('#month').hide();
-      $('#week').show();
-    });
-    $('.month').click( function() {
-      $('#week').hide();
-      $('#day').hide();
-      $('#month').show();
-    });
-   });
   </script>
 
 </body>
